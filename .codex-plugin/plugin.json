@@ -1,0 +1,48 @@
+{
+  "name": "boardrepo",
+  "version": "1.0.0",
+  "description": "Search and review real PCB projects with BoardRepo. Inspect schematic connectivity, BOMs and source files, run KiCad checks, compare fabrication limits, and review boards you own.",
+  "author": {
+    "name": "Flintt, Inc.",
+    "email": "support@boardrepo.com",
+    "url": "https://boardrepo.com"
+  },
+  "homepage": "https://boardrepo.com/connect",
+  "repository": "https://github.com/flintt-dev/boardrepo-plugin",
+  "license": "MIT",
+  "keywords": [
+    "electronics",
+    "eda",
+    "kicad",
+    "pcb-design",
+    "hardware-design",
+    "design-review",
+    "schematic-analysis",
+    "bom",
+    "drc"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "BoardRepo",
+    "shortDescription": "Search and review PCB designs",
+    "longDescription": "Answer hardware questions from real BoardRepo projects: search published designs, inspect actual schematic connectivity, BOMs and files, run KiCad DRC/ERC and fabrication checks, and review boards you own.",
+    "developerName": "Flintt, Inc.",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://boardrepo.com/connect",
+    "privacyPolicyURL": "https://boardrepo.com/privacy",
+    "termsOfServiceURL": "https://boardrepo.com/terms",
+    "defaultPrompt": [
+      "Find a published nRF54L15 board and explain its power circuit from the schematic.",
+      "Check whether this BoardRepo board passes KiCad DRC/ERC and a compatible fab profile.",
+      "Review my BoardRepo board, verify each finding, and report what was not checked."
+    ],
+    "brandColor": "#2DA44E",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "logoDark": "./assets/icon-dark.png"
+  }
+}
