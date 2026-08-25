@@ -83,7 +83,7 @@ returns unsupported rather than guessing at the nearest profile, so an unsupport
 means "not encoded", never "fails".
 
 **Nothing stored?** → `run_checks` starts a run. **This is expensive**: a full `kicad-cli`
-DRC on a worker shared with everyone's uploads. Do not call it speculatively, do not call it
+DRC on capacity shared with everyone's uploads. Do not call it speculatively, do not call it
 for each result while browsing a search, and do not call it again while one is running. It
 returns quickly when the run finishes in time and otherwise hands back a poll handle for
 `get_checks`. If it reports `failed`, the run died — re-running usually fails the same way,
