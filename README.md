@@ -56,6 +56,8 @@ ingestion contract before this package is mirrored here. Directory preview testi
 before either submission is published.
 
 - Documentation: <https://boardrepo.com/connect>
+- Smithery: <https://smithery.ai/servers/boardrepo/boardrepo>
+- Glama: <https://glama.ai/mcp/connectors/com.boardrepo/boardrepo>
 - Privacy: <https://boardrepo.com/privacy>
 - Terms: <https://boardrepo.com/terms>
 - Support: <mailto:support@boardrepo.com>
