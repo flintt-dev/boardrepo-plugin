@@ -16,19 +16,20 @@ Claude Code and Cowork. Both wrappers use the same hosted service and the same s
 - `skills/boardrepo/SKILL.md` is the shared provider-neutral workflow.
 - `assets/` contains BoardRepo's approved light and dark icons.
 
+The Cursor package adds the same hosted MCP endpoint. Choose **Read public boards only** on
+BoardRepo’s OAuth consent screen to inspect published projects. The Cursor package exposes the
+server tools directly.
+
 The package contains no local server, access token, reviewer account, user data, cached analysis, or
 analytics. The OpenAI app identifier is public connection metadata, not a credential. Tool access is
 authorized by BoardRepo OAuth when a user connects.
 
 ## What it can do
 
-The hosted server exposes 15 tools for public-board discovery, board metadata, file and BOM reads,
-schematic connectivity, KiCad DRC/ERC, fabrication profiles, structured design queries, and
-owner-authorized reviews. Every tool is read-only. Checks and reviews may return a running status,
-but no tool edits, deletes, uploads, renames, or publishes a board.
-
-Public boards are available by default. Reading a user's own boards, including private ones, requires
-the user to grant that access during BoardRepo authorization.
+The hosted server supports public board discovery, saved versions, schematic connectivity, PCB
+copper, files, bills of materials, fabrication profiles, and stored DRC/ERC results. The live tool
+list reflects the permissions granted to each connection. BoardRepo requests separate consent for
+access to personal or organization boards and for saving, when the client and account support it.
 
 ## How the guidance is split
 
@@ -56,7 +57,6 @@ ingestion contract before this package is mirrored here. Directory preview testi
 before either submission is published.
 
 - Documentation: <https://boardrepo.com/connect>
-- Smithery: <https://smithery.ai/servers/boardrepo/boardrepo>
 - Glama: <https://glama.ai/mcp/connectors/com.boardrepo/boardrepo>
 - Privacy: <https://boardrepo.com/privacy>
 - Terms: <https://boardrepo.com/terms>
