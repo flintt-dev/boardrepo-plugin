@@ -1,7 +1,7 @@
 {
   "name": "boardrepo",
   "version": "1.0.0",
-  "description": "Find public PCB projects and inspect saved schematics, copper, bills of materials, source files, and check results.",
+  "description": "A workspace for PCB projects. Explore public boards and inspect schematics, layouts, BOMs, files and saved versions with your AI assistant.",
   "author": {
     "name": "BoardRepo",
     "email": "support@boardrepo.com"

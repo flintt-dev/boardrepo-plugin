@@ -1,8 +1,11 @@
 # BoardRepo plugin
 
-BoardRepo connects ChatGPT, Codex, Claude Code, and Claude Cowork to real PCB projects. It combines
-BoardRepo's hosted MCP tools with one shared workflow skill for finding boards, reading schematic
-connectivity and BOMs, running checks, and reviewing boards a user owns.
+BoardRepo is a workspace for PCB projects. Keep your KiCad designs and saved versions together, explore public boards, and bring real design context into your AI tools.
+
+The plugin connects your AI assistant to BoardRepo’s hosted MCP tools. Find public projects,
+inspect schematics, layouts, bills of materials and source files, compare saved versions, and read
+existing DRC/ERC reports. Personal or organization access requires separate consent and support
+from the client and account.
 
 The OpenAI package is for the universal Plugins Directory shared by ChatGPT and Codex. The Claude
 package complements BoardRepo's existing connector listing by adding the same workflow skill for
