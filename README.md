@@ -1,8 +1,11 @@
 # BoardRepo plugin
 
-BoardRepo connects ChatGPT, Codex, Claude Code, and Claude Cowork to real PCB projects. It combines
-BoardRepo's hosted MCP tools with one shared workflow skill for finding boards, reading schematic
-connectivity and BOMs, running checks, and reviewing boards a user owns.
+BoardRepo is your electronics workspace. Keep your KiCad projects and saved versions together, explore public PCB designs, and bring real design context into your AI tools.
+
+The plugin connects your AI assistant to BoardRepo’s hosted MCP tools. Find public projects,
+inspect schematics, layouts, bills of materials and source files, compare saved versions, and read
+existing DRC/ERC reports. Personal or organization access requires separate consent and support
+from the client and account.
 
 The OpenAI package is for the universal Plugins Directory shared by ChatGPT and Codex. The Claude
 package complements BoardRepo's existing connector listing by adding the same workflow skill for
@@ -16,19 +19,20 @@ Claude Code and Cowork. Both wrappers use the same hosted service and the same s
 - `skills/boardrepo/SKILL.md` is the shared provider-neutral workflow.
 - `assets/` contains BoardRepo's approved light and dark icons.
 
+The Cursor package adds the same hosted MCP endpoint. Choose **Read public boards only** on
+BoardRepo’s OAuth consent screen to inspect published projects. The Cursor package exposes the
+server tools directly.
+
 The package contains no local server, access token, reviewer account, user data, cached analysis, or
 analytics. The OpenAI app identifier is public connection metadata, not a credential. Tool access is
 authorized by BoardRepo OAuth when a user connects.
 
 ## What it can do
 
-The hosted server exposes 15 tools for public-board discovery, board metadata, file and BOM reads,
-schematic connectivity, KiCad DRC/ERC, fabrication profiles, structured design queries, and
-owner-authorized reviews. Every tool is read-only. Checks and reviews may return a running status,
-but no tool edits, deletes, uploads, renames, or publishes a board.
-
-Public boards are available by default. Reading a user's own boards, including private ones, requires
-the user to grant that access during BoardRepo authorization.
+The hosted server supports public board discovery, saved versions, schematic connectivity, PCB
+copper, files, bills of materials, fabrication profiles, and stored DRC/ERC results. The live tool
+list reflects the permissions granted to each connection. BoardRepo requests separate consent for
+access to personal or organization boards and for saving, when the client and account support it.
 
 ## How the guidance is split
 
@@ -56,7 +60,6 @@ ingestion contract before this package is mirrored here. Directory preview testi
 before either submission is published.
 
 - Documentation: <https://boardrepo.com/connect>
-- Smithery: <https://smithery.ai/servers/boardrepo/boardrepo>
 - Glama: <https://glama.ai/mcp/connectors/com.boardrepo/boardrepo>
 - Privacy: <https://boardrepo.com/privacy>
 - Terms: <https://boardrepo.com/terms>

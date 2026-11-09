@@ -1,7 +1,7 @@
 {
   "name": "boardrepo",
   "version": "1.0.0",
-  "description": "Search and review real PCB projects with BoardRepo. Inspect schematic connectivity, BOMs and source files, run KiCad checks, compare fabrication limits, and review boards you own.",
+  "description": "A workspace for PCB projects. Explore public boards and inspect schematics, layouts, BOMs, files and saved versions with your AI assistant.",
   "author": {
     "name": "Flintt, Inc.",
     "email": "support@boardrepo.com",

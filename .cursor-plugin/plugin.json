@@ -1,0 +1,21 @@
+{
+  "name": "boardrepo",
+  "version": "1.0.0",
+  "description": "Your electronics workspace. Explore public PCB projects and inspect schematics, layouts, BOMs and saved versions with your AI assistant.",
+  "author": {
+    "name": "BoardRepo",
+    "email": "support@boardrepo.com"
+  },
+  "homepage": "https://boardrepo.com/connect",
+  "repository": "https://github.com/flintt-dev/boardrepo-plugin",
+  "license": "MIT",
+  "keywords": [
+    "pcb",
+    "kicad",
+    "altium",
+    "hardware"
+  ],
+  "logo": "assets/icon.png",
+  "skills": [],
+  "mcpServers": "mcp.json"
+}
