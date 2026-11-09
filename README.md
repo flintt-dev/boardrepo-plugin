@@ -1,6 +1,6 @@
 # BoardRepo plugin
 
-BoardRepo is a workspace for PCB projects. Keep your KiCad designs and saved versions together, explore public boards, and bring real design context into your AI tools.
+BoardRepo is your electronics workspace. Keep your KiCad projects and saved versions together, explore public PCB designs, and bring real design context into your AI tools.
 
 The plugin connects your AI assistant to BoardRepo’s hosted MCP tools. Find public projects,
 inspect schematics, layouts, bills of materials and source files, compare saved versions, and read
