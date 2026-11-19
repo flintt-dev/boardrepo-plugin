@@ -150,12 +150,16 @@ def main() -> int:
         return " **high-risk**" if pr["highRisk"] else ""
 
     def line(pr: dict, with_tag: bool) -> str:
-        return (f"- [ ] #{pr['number']} {pr['title']} (by @{pr['author']['login']}, "
+        # A title is one line in the checklist, so a title that holds a task list adds no boxes.
+        title = " ".join(pr["title"].split())
+        return (f"- [ ] #{pr['number']} {title} (by @{pr['author']['login']}, "
                 f"merged {pr['mergedAt'][:16]}Z){tag(pr) if with_tag or not pr['wholeFileList'] else ''}")
 
     def issue_exists(title: str, marker: str) -> bool:
-        found = json.loads(gh("issue", "list", "--repo", repo, "--state", "all", "--limit", "100",
-                              "--search", f'in:title "{title}"', "--json", "title,author,body"))
+        # Listed, not searched: the search index can lag behind an issue a run just opened, so a
+        # quick rerun would open a second one. This repository has few issues; the list is whole.
+        found = json.loads(gh("issue", "list", "--repo", repo, "--state", "all", "--limit", "1000",
+                              "--json", "title,author,body"))
         return any(i["title"] == title and (i.get("author") or {}).get("login") in authors
                    and marker in (i.get("body") or "") for i in found)
 
