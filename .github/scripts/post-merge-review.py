@@ -160,6 +160,10 @@ def main() -> int:
         # quick rerun would open a second one. This repository has few issues; the list is whole.
         found = json.loads(gh("issue", "list", "--repo", repo, "--state", "all", "--limit", "1000",
                               "--json", "title,author,body"))
+        if len(found) >= 1000:
+            # The list may be cut; an older window's issue is then found by title search instead.
+            found += json.loads(gh("issue", "list", "--repo", repo, "--state", "all", "--limit", "100",
+                                   "--search", f'in:title "{title}"', "--json", "title,author,body"))
         return any(i["title"] == title and (i.get("author") or {}).get("login") in authors
                    and marker in (i.get("body") or "") for i in found)
 
