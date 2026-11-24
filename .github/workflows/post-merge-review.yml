@@ -1,0 +1,86 @@
+name: Post-merge review
+
+# Opens the review issues that Change & Release Management requirements 4 and 5 rely on:
+# a weekday issue for high-risk merges into main, reviewed by the founder who did not author them,
+# and a weekly issue listing every merge of the past week (Monday to Monday) for the CEO. Both steps
+# run every weekday; each run makes up windows an earlier failed or missed run left unopened.
+
+on:
+  schedule:
+    # 09:00, two hours after the 07:00 window boundary, so GitHub search has every merge indexed.
+    - cron: "0 9 * * 1-5"
+  pull_request:
+    paths:
+      - .github/scripts/post-merge-review.py
+      - .github/scripts/tests/post-merge-review.smoke.ts
+      - .github/workflows/post-merge-review.yml
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: daily or weekly
+        required: true
+        default: daily
+        type: choice
+        options: [daily, weekly]
+      as_of:
+        description: Rerun an older date (YYYY-MM-DD, taken as that day's 07:00 UTC). Leave empty for today.
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+
+jobs:
+  test:
+    name: Test the review script
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: node --experimental-strip-types .github/scripts/tests/post-merge-review.smoke.ts
+
+  review:
+    name: Open review issues
+    # Only the runs that open issues share this queue; pull request tests never wait in it or
+    # replace a pending backfill.
+    concurrency:
+      group: post-merge-review
+      cancel-in-progress: false
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CEO_LOGIN: kkkaaai
+      CTO_LOGIN: rrenamed
+      # No issues for windows that end at or before this time (a window that straddles it is opened whole); merges before then are in
+      # flintt-dev/boardrepo#2587. Each run also goes back over the windows before the latest one,
+      # so a failed or late run is made up by the next.
+      REVIEW_NOT_BEFORE: "2026-11-19T07:00:00Z"
+      AS_OF: ${{ inputs.as_of }}
+      HIGH_RISK_GLOBS: >-
+        .github/**
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: High-risk merges (weekdays)
+        if: github.event_name == 'schedule' || inputs.mode == 'daily'
+        run: python3 .github/scripts/post-merge-review.py daily ${AS_OF:+--as-of "$AS_OF"}
+      - name: Weekly review
+        # Runs even if the daily step failed, and every weekday, so a missed Monday is made up the
+        # next day; the script opens each week's issue once.
+        if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.mode == 'weekly') }}
+        run: python3 .github/scripts/post-merge-review.py weekly ${AS_OF:+--as-of "$AS_OF"}
